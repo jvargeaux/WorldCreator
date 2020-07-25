@@ -1,0 +1,460 @@
+
+
+$colorNeutral1: #53575d;
+$colorNeutral2: #939ba2;
+$colorNeutralHover: #c6c6c6;
+$colorSelected1: #ace9ff;
+
+
+/* -------------------- */
+/*         FONTS        */
+/* -------------------- */
+
+// 300, 400
+@mixin fontLato($weight, $size) {
+  font-family: 'Lato', sans-serif;
+  font-weight: $weight;
+  font-size: $size;
+}
+// 100, 300, 400
+@mixin fontAlegreya($weight, $size) {
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: $weight;
+  font-size: $size;
+}
+@mixin fontCinzel($size) {
+  font-family: 'Cinzel', serif;
+  font-weight: 400;
+  font-size: $size;
+}
+@mixin fontMetal($size) {
+  font-family: 'Metal Mania', cursive;
+  font-weight: 400;
+  font-size: $size;
+}
+@mixin fontTenali($size) {
+  font-family: 'Tenali Ramakrishna', sans-serif;
+  font-weight: 400;
+  font-size: $size;
+}
+// 100, 200, 300, 400
+@mixin fontTaviraj($weight, $size) {
+  font-family: 'Taviraj', serif;
+  font-weight: $weight;
+  font-size: $size;
+}
+
+
+@mixin flex($rowOrColumn, $justify, $align) {
+  display: flex;
+  flex-direction: $rowOrColumn;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+
+/* -------------------- */
+/*        COLORS        */
+/* -------------------- */
+
+/* -------------------- */
+
+
+html {
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,.2);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.1);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,.25);
+}
+
+body {
+  background-color: #2e2e37;
+  color: #ccc;
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+  margin: 0;
+}
+
+.App {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.SideMenu {
+  min-width: 15vw;
+  width: 15vw;
+  height: 100vh;
+}
+
+.SideMenuFixedContainer {
+  background: rgba(0,0,0,.3);
+  position: fixed;
+  left: 0;
+  top: 0;
+  @include flex(column, flex-start, stretch);
+  width: 15vw;
+  height: 100vh;
+  z-index: 999;
+}
+
+.SideMenuItemContainer {
+  align-items: center;
+  border: 1px solid $colorNeutral1;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 40px;
+  margin-top: 60px;
+  padding: 25px;
+  transition: color 0.3s, border 0.3s;
+}
+.SideMenuItemContainer:hover {
+  border-color: $colorNeutralHover;
+  color: $colorNeutralHover;
+  cursor: pointer;
+}
+.SideMenuItemContainer:hover i, .SideMenuItemContainer:hover h3 {
+  color: $colorNeutralHover;
+}
+
+.SideMenuItemContainer i {
+  color: $colorNeutral2;
+  flex: 1 1 50px;
+  transition: color 0.3s;
+}
+
+.SideMenuItemContainer h3 {
+  color: $colorNeutral2;
+  flex: 1 1 0;
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  margin: 0;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.BG {
+  height: 100vh;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+}
+
+
+/* -------------------- */
+/*          MAP         */
+/* -------------------- */
+
+.WorldMapContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#mapid {
+  width: 80%;
+  height: 50%;
+}
+
+.WorldMap {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.MapContainer {
+  overflow: scroll;
+  position: relative;
+  width: 70vw;
+  max-width: 70vw;
+}
+.MapContainer::-webkit-scrollbar {
+  background: transparent;
+  height: 0;
+  width: 0;
+}
+
+.MapContainer img {
+  min-width: 100%;
+}
+
+.MapOverlay {
+  background: rgba(0,0,0,.2);
+  position: absolute;
+}
+
+.MapPoint {
+  align-items: center;
+  border: 1px solid rgba(255,255,255,.3);
+  box-sizing: border-box;
+  color: #67a0e4;
+  display: flex;
+  font-weight: 400;
+  height: 60px;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  transform: translate(-30px, -30px);
+  width: 60px;
+}
+.MapPoint i {
+  transition: color 0.2s;
+}
+.MapPoint:hover {
+  cursor: pointer;
+}
+.MapPoint:hover i {
+  color: #fff;
+}
+
+.MapPointIcon {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  transform: translateY(-50%);
+}
+
+.MapPointText {
+  font-size: 16px;
+  opacity: 0;
+  position: absolute;
+  text-transform: uppercase;
+  transition: opacity 0.2s, color 0.2s;
+}
+.MapPoint:hover .MapPointText {
+  opacity: 1;
+}
+
+.MapPointSelected {
+  color: #9eecc0;
+}
+.MapPointSelected .MapPointText {
+  opacity: 1;
+}
+
+
+/* -------------------- */
+/*         WIKI         */
+/* -------------------- */
+
+.Wiki {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.WikiBG {
+  background-image: url('./assets/lotr1.jpg');
+  background-size: cover;
+  position: fixed;
+}
+
+.WikiBGOverlay {
+  background: linear-gradient(150deg, rgba(17,17,18,.9), rgba(56,57,69,.5));
+  position: fixed;
+}
+
+.WikiContent {
+  @include flex(column, flex-start, center);
+  width: 100%;
+  z-index: 99;
+}
+
+.WikiMainButtons {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 5vh;
+}
+
+.Wiki button {
+  align-items: center;
+  background: url('./assets/wiki_button_still.png');
+  background-position: 50% 50%;
+  background-size: 130%;
+  border: 0.5px solid rgba(70,70,70,1);
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  justify-content: center;
+  margin: 30px;
+  outline: none;
+  transition: background 0.75s, border 0.4s, box-shadow 0.4s;
+  width: 150px;
+}
+.Wiki button:hover {
+  background-image: url('./assets/wiki_button.gif');
+  border: 0.5px solid rgba(255,255,255,.7) !important;
+  box-shadow: 0 0 12px rgba(221,241,252,.35) !important;
+  cursor: pointer;
+}
+.Wiki button:hover .WikiButtonIcon {
+  color: #dadada;
+}
+.Wiki button:hover span {
+  opacity: 1;
+}
+
+.WikiButtonIcon {
+  color: #494d58;
+  mix-blend-mode: overlay;
+  transition: color 0.4s;
+}
+
+.Wiki button span {
+  color: rgba(255,255,255,.6);
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-top: 100px;
+  opacity: 0;
+  position: absolute;
+  text-shadow: 0 0 8px rgba(255,255,255,.6);
+  text-transform: uppercase;
+  transition: opacity 0.4s;
+}
+
+.WikiCategorySelected {
+  background-image: url('./assets/wiki_button.gif') !important;
+  border: 0.5px solid rgba($colorSelected1,.7) !important;
+  box-shadow: 0 0 12px rgba($colorSelected1,.35) !important;
+}
+.WikiCategorySelected .WikiButtonIcon {
+  color: $colorSelected1;
+}
+
+.WikiList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+  width: 80%;
+}
+
+.WikiListItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background: rgba($colorNeutral2,.1);
+  width: 100%;
+  margin-bottom: 3px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: 0.5px solid rgba(0,0,0,0);
+  overflow: hidden;
+  transition: background 0.2s, border 0.2s;
+  @include fontTaviraj(200, 18px);
+  letter-spacing: 0.5px;
+  color: $colorNeutral2;
+}
+.WikiListItem:hover {
+  cursor: pointer;
+  background: rgba($colorNeutral2,.25);
+  color: $colorNeutralHover;
+  border: 0.5px solid rgba(255,255,255,.7);
+  box-shadow: 0 0 8px rgba(255,255,255,.35);
+}
+
+.WikiListItemAvatar {
+  height: 100px;
+  width: 120px;
+  object-fit: cover;
+  margin-right: 30px;
+}
+
+.WikiPage {
+  @include flex(column, center, center);
+  background: rgba(75,75,75,.25);
+  padding: 60px;
+  width: 80%;
+  margin-top: 60px;
+  border-radius: 12px;
+  white-space: pre-wrap;
+  text-align: left;
+
+  h1 {
+    @include fontCinzel(38px);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+  h2 {
+    @include fontAlegreya(300, 20px);
+    letter-spacing: 1px;
+    width: 100%;
+    margin-top: 0;
+    text-transform: uppercase;
+    color: $colorNeutral2;
+  }
+  h3 {
+    @include fontAlegreya(300, 20px);
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+  }
+  h4 {
+    @include fontAlegreya(400, 22px);
+    text-align: left;
+    letter-spacing: 0.5px;
+  }
+  p {
+    @include fontAlegreya(100, 20px);
+    text-align: left;
+  }
+}
+
+.WikiPageHeader {
+  @include flex(row, flex-start, stretch);
+  width: 100%;
+}
+
+.WikiPageAvatar {
+  width: 300px;
+  height: 300px;
+  border-radius: 12px;
+}
+
+.WikiPageSubHeader {
+  @include flex(column, flex-start, center);
+  width: 100%;
+  height: 100%;
+  padding-left: 40px;
+}
+
+.WikiPageBody {
+  @include flex(column, flex-start, flex-start);
+  width: 100%;
+  margin-top: 60px;
+}

@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import SideMenu from './SideMenu';
+import WorldMap from './WorldMap';
+import Wiki from './Wiki';
+import './App.scss';
+import wikiData from './WikiData.js';
 
 function App() {
+
+  const [selectedMenu, setSelectedMenu] = useState(1);
+  const [data, setData] = useState(wikiData);
+
+  const selectMenuItem = (index) => {
+    setSelectedMenu(index);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SideMenu selectMenuItem={selectMenuItem} />
+      {selectedMenu === 0 ? <WorldMap /> : ''}
+      {selectedMenu >= 1 ? <Wiki data={data} /> : ''}
     </div>
   );
 }
